@@ -21,7 +21,7 @@ public class InputUtils {
         return indexes;
     }
 
-    public static void removeNullsFromListHead(List<Integer> input) {
+    public static void removeNullsFromList(List<Integer> input) {
         input.removeAll(Collections.singleton(null));
     }
 }

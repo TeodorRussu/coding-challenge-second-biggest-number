@@ -37,8 +37,8 @@ class SecondBiggestNumberFinderTest {
     }
 
     @Test
-    void findSecondBiggestNumber_NullsInTheInput_IgnoreThem() throws ExecutionException, InterruptedException {
-        Integer nullInteger= null;
+    void findSecondBiggestNumber_nullsInTheInput_ignoreThem() throws ExecutionException, InterruptedException {
+        Integer nullInteger = null;
         List<Integer> input = new ArrayList<>();
         input.add(1);
         input.add(0);
@@ -46,9 +46,10 @@ class SecondBiggestNumberFinderTest {
         var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
         Assertions.assertEquals(0, output);
     }
+
     @Test
-    void findSecondBiggestNumber_NullFirstItemInInput_IgnoreIt() throws ExecutionException, InterruptedException {
-        Integer nullInteger= null;
+    void findSecondBiggestNumber_nullFirstItemInInput_ignoreIt() throws ExecutionException, InterruptedException {
+        Integer nullInteger = null;
         List<Integer> input = new ArrayList<>();
         input.add(nullInteger);
         input.add(1);
@@ -56,65 +57,63 @@ class SecondBiggestNumberFinderTest {
         var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
         Assertions.assertEquals(0, output);
     }
-@Test
-    void findSecondBiggestNumber_FirstTwoItemsInInputAreNulls_IgnoreThem() throws ExecutionException, InterruptedException {
-        Integer nullInteger= null;
-        List<Integer> input = new ArrayList<>();
-        input.add(nullInteger);
-        input.add(nullInteger);
-        input.add(1);
-        input.add(0);
-        var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
-        Assertions.assertEquals(0, output);
-    }
+
     @Test
-    void findSecondBiggestNumber_TwoDifferentNumbers() throws ExecutionException, InterruptedException {
+    void findSecondBiggestNumber_firstTwoItemsInInputAreNulls_ignoreThem() throws ExecutionException, InterruptedException {
+        Integer nullInteger = null;
+        List<Integer> input = new ArrayList<>();
+        input.add(nullInteger);
+        input.add(nullInteger);
+        input.add(1);
+        input.add(0);
+        var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
+        Assertions.assertEquals(0, output);
+    }
+
+    @Test
+    void findSecondBiggestNumber_twoDifferentNumbers() throws ExecutionException, InterruptedException {
         var input = generateListOf(0, 1);
         var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
         Assertions.assertEquals(0, output);
     }
 
     @Test
-    void findSecondBiggestNumber_TwoSimilarNumbers() throws ExecutionException, InterruptedException {
+    void findSecondBiggestNumber_twoSimilarNumbers() throws ExecutionException, InterruptedException {
         var input = generateListOf(1, 1);
         var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
         Assertions.assertEquals(1, output);
     }
 
     @Test
-    void findSecondBiggestNumber_AllSimilarNumbers() throws ExecutionException, InterruptedException {
+    void findSecondBiggestNumber_allSimilarNumbers() throws ExecutionException, InterruptedException {
         var input = generateListOf(1, 1, 1, 1, 1);
         var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
         Assertions.assertEquals(1, output);
     }
 
     @Test
-    void findSecondBiggestNumber_NegativeNumbers() throws ExecutionException, InterruptedException {
+    void findSecondBiggestNumber_negativeNumbers() throws ExecutionException, InterruptedException {
         var input = generateListOf(-1, -2, -3, -1, -1);
         var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
         Assertions.assertEquals(-1, output);
     }
 
     @Test
-    void findSecondBiggestNumber_IntegerMinMax() throws ExecutionException, InterruptedException {
+    void findSecondBiggestNumber_integerMinMax() throws ExecutionException, InterruptedException {
         var input = generateListOf(Integer.MIN_VALUE, Integer.MAX_VALUE);
         var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
         Assertions.assertEquals(Integer.MIN_VALUE, output);
     }
 
     @Test
-    void findSecondBiggestNumber_IntegerMaxMax() throws ExecutionException, InterruptedException {
+    void findSecondBiggestNumber_integerMaxMax() throws ExecutionException, InterruptedException {
         var input = generateListOf(Integer.MAX_VALUE, Integer.MAX_VALUE);
         var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
         Assertions.assertEquals(Integer.MAX_VALUE, output);
     }
 
-    private List<Integer> generateListOf(Integer ... values) {
-        return Arrays.asList(values);
-    }
-
     @Test
-    void findSecondBiggestNumber_UniqueNumbers() throws ExecutionException, InterruptedException {
+    void findSecondBiggestNumber_uniqueNumbers() throws ExecutionException, InterruptedException {
         Mockito.when(runtimeExplorer.getAvailableProcessors()).thenReturn(8);
         var input = IntStream.rangeClosed(1, 100_000).boxed().collect(Collectors.toList());
         var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
@@ -123,7 +122,7 @@ class SecondBiggestNumberFinderTest {
     }
 
     @Test
-    void findSecondBiggestNumber_MaximumIsDuplicated() throws ExecutionException, InterruptedException {
+    void findSecondBiggestNumber_maximumIsDuplicated() throws ExecutionException, InterruptedException {
         Mockito.when(runtimeExplorer.getAvailableProcessors()).thenReturn(16);
         int inputSize = 1_000_000;
         var input = IntStream.rangeClosed(0, inputSize).boxed().collect(Collectors.toList());
@@ -133,4 +132,7 @@ class SecondBiggestNumberFinderTest {
         Assertions.assertEquals(inputSize, output);
     }
 
+    private List<Integer> generateListOf(Integer... values) {
+        return Arrays.asList(values);
+    }
 }

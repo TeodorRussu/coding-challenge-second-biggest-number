@@ -11,7 +11,7 @@ public class RuntimeExplorer {
     private Integer availableProcessors;
 
     @PostConstruct
-    private void initAvailableProcessors(){
+    private void initAvailableProcessors() {
         availableProcessors = Runtime.getRuntime().availableProcessors();
 
     }

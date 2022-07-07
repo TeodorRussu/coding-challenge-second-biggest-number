@@ -15,7 +15,7 @@ public class InputValidator {
         if (input == null || input.isEmpty()) {
             throw new RuntimeException(INPUT_NULL_OR_EMPTY_MESSAGE);
         }
-        InputUtils.removeNullsFromListHead(input);
+        InputUtils.removeNullsFromList(input);
         if (input.size() < 2) {
             throw new RuntimeException(MINIMUM_OF_2_VALUES_MESSAGE);
         }
