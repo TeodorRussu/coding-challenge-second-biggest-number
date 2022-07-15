@@ -1,27 +1,19 @@
 package coding.secondbiggernumber;
 
-import coding.secondbiggernumber.core.Engine;
 import coding.secondbiggernumber.core.SecondBiggestNumberFinder;
-import coding.secondbiggernumber.utils.RuntimeExplorer;
 import coding.secondbiggernumber.validator.InputValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 class SecondBiggestNumberFinderTest {
-
-    @Mock
-    RuntimeExplorer runtimeExplorer;
 
     SecondBiggestNumberFinder secondBiggestNumberFinder;
 
@@ -30,16 +22,13 @@ class SecondBiggestNumberFinderTest {
         MockitoAnnotations.openMocks(this);
 
         secondBiggestNumberFinder = new SecondBiggestNumberFinder();
-
-        secondBiggestNumberFinder.setRuntimeExplorer(runtimeExplorer);
         secondBiggestNumberFinder.setInputValidator(new InputValidator());
-        secondBiggestNumberFinder.setEngine(new Engine());
     }
 
     @Test
     void findSecondBiggestNumber_nullsInTheInput_ignoreThem() throws ExecutionException, InterruptedException {
         Integer nullInteger = null;
-        List<Integer> input = new ArrayList<>();
+        LinkedList<Integer> input = new LinkedList<>();
         input.add(1);
         input.add(0);
         input.add(nullInteger);
@@ -50,7 +39,7 @@ class SecondBiggestNumberFinderTest {
     @Test
     void findSecondBiggestNumber_nullFirstItemInInput_ignoreIt() throws ExecutionException, InterruptedException {
         Integer nullInteger = null;
-        List<Integer> input = new ArrayList<>();
+        LinkedList<Integer> input = new LinkedList<>();
         input.add(nullInteger);
         input.add(1);
         input.add(0);
@@ -61,7 +50,7 @@ class SecondBiggestNumberFinderTest {
     @Test
     void findSecondBiggestNumber_firstTwoItemsInInputAreNulls_ignoreThem() throws ExecutionException, InterruptedException {
         Integer nullInteger = null;
-        List<Integer> input = new ArrayList<>();
+        LinkedList<Integer> input = new LinkedList<>();
         input.add(nullInteger);
         input.add(nullInteger);
         input.add(1);
@@ -114,8 +103,7 @@ class SecondBiggestNumberFinderTest {
 
     @Test
     void findSecondBiggestNumber_uniqueNumbers() throws ExecutionException, InterruptedException {
-        Mockito.when(runtimeExplorer.getAvailableProcessors()).thenReturn(8);
-        var input = IntStream.rangeClosed(1, 100_000).boxed().collect(Collectors.toList());
+        var input = IntStream.rangeClosed(1, 100_000).boxed().collect(Collectors.toCollection(LinkedList::new));
         var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
         Assertions.assertNotNull(output);
         Assertions.assertEquals(99_999, output);
@@ -123,16 +111,15 @@ class SecondBiggestNumberFinderTest {
 
     @Test
     void findSecondBiggestNumber_maximumIsDuplicated() throws ExecutionException, InterruptedException {
-        Mockito.when(runtimeExplorer.getAvailableProcessors()).thenReturn(16);
         int inputSize = 1_000_000;
-        var input = IntStream.rangeClosed(0, inputSize).boxed().collect(Collectors.toList());
+        var input = IntStream.rangeClosed(0, inputSize).boxed().collect(Collectors.toCollection(LinkedList::new));
         input.add(0, inputSize); //duplicate the max value in the input list
 
         var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
         Assertions.assertEquals(inputSize, output);
     }
 
-    private List<Integer> generateListOf(Integer... values) {
-        return Arrays.asList(values);
+    private LinkedList<Integer> generateListOf(Integer... values) {
+        return new LinkedList<>(Arrays.asList(values));
     }
 }

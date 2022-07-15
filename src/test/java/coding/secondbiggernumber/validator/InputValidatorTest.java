@@ -18,9 +18,9 @@ class InputValidatorTest {
 
     @Test
     void testInvalidInput() {
-        Assertions.assertThatThrownBy(() -> validator.validateInput(null)).hasMessage(InputValidator.INPUT_NULL_OR_EMPTY_MESSAGE);
-        Assertions.assertThatThrownBy(() -> validator.validateInput(new ArrayList<>())).hasMessage(InputValidator.INPUT_NULL_OR_EMPTY_MESSAGE);
-        Assertions.assertThatThrownBy(() -> validator.validateInput(Collections.singletonList(1))).hasMessage(InputValidator.MINIMUM_OF_2_VALUES_MESSAGE);
+        Assertions.assertThatThrownBy(() -> validator.validate(null)).hasMessage(InputValidator.INPUT_NULL_OR_EMPTY_MESSAGE);
+        Assertions.assertThatThrownBy(() -> validator.validate(new ArrayList<>())).hasMessage(InputValidator.INPUT_NULL_OR_EMPTY_MESSAGE);
+        Assertions.assertThatThrownBy(() -> validator.validate(Collections.singletonList(1))).hasMessage(InputValidator.MINIMUM_OF_2_VALID_VALUES_MESSAGE);
     }
 
 }

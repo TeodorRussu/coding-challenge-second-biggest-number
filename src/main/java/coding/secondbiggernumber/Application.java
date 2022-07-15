@@ -37,18 +37,5 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        int inputSize = 200_000_000;
-//        var input = IntStream.rangeClosed(0, inputSize).boxed().collect(Collectors.toList());
-//        input.add(0, inputSize);
-//
-//        LocalDateTime start = LocalDateTime.now();
-//        secondBiggestNumberFinder.findSecondBiggestNumber(input);
-//        LocalDateTime end = LocalDateTime.now();
-//        log.info("async execution time: {}", ChronoUnit.MILLIS.between(start, end));
-//
-//        start = LocalDateTime.now();
-//        secondBiggestNumberFinder.findSecondBiggestNumberLinear(input);
-//        end = LocalDateTime.now();
-//        log.info("async execution time: {}", ChronoUnit.MILLIS.between(start, end));
     }
 }

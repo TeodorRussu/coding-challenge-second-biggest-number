@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.LinkedList;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -22,20 +23,14 @@ class E2EApplicationTest {
 
     @Test
     void e2eTest() throws ExecutionException, InterruptedException {
-        int inputSize = 200_000_000;
-        var input = IntStream.rangeClosed(0, inputSize).boxed().collect(Collectors.toList());
+        int inputSize = 1_000_000;
+        var input = IntStream.rangeClosed(0, inputSize).boxed().collect(Collectors.toCollection(LinkedList::new));
         input.add(0, inputSize);
 
         LocalDateTime start = LocalDateTime.now();
         var output = secondBiggestNumberFinder.findSecondBiggestNumber(input);
         LocalDateTime end = LocalDateTime.now();
         log.info("async execution time: " + ChronoUnit.MILLIS.between(start, end));
-        Assertions.assertEquals(inputSize, output);
-
-        var startS = LocalDateTime.now();
-        output = secondBiggestNumberFinder.findSecondBiggestNumberLinear(input);
-        var endS = LocalDateTime.now();
-        log.info("sync execution time: " + ChronoUnit.MILLIS.between(startS, endS));
         Assertions.assertEquals(inputSize, output);
     }
 
